@@ -7,8 +7,6 @@ from ACME_client import ACME_client
 from DNS_server import Resolver
 import hashlib
 
-from project import ChallengeHTTP
-
 
 def parseArgs():
 
