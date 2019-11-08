@@ -201,9 +201,10 @@ class ACME_client:
             r = requests.post(url, data=body, headers=headers, verify="pebble_https_ca.pem")
             self.nonce = r.headers['Replay-Nonce']  # update nonce
             if r.status_code == 200 or r.status_code == 201:
+                print(r)
                 break
-                
             else:
                 print(r.text)
+
         return r
 

@@ -25,6 +25,9 @@ if __name__ == '__main__':
     acme = ACME_client(args.get('dir'))
     dns = Resolver(args.get('record'))
     dns.start()
+
+    print("")
+
     #DNS_server = subprocess.Popen(['python', 'DNS_server.py', args.get('record')])
     Chall_http_server = subprocess.Popen(['python', "ChallengeHTTP.py",args.get('record')])
     Shutdown_server = subprocess.Popen(['python', "ShutdownHTTP.py",args.get('record')])
