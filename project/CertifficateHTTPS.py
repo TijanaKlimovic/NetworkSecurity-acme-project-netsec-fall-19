@@ -14,9 +14,9 @@ def main():
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('record')
     args = vars(parser.parse_args())
-    app.config['SERVER_NAME'] = args.get('record') + ':5001'
-    #app.run(host=args.get('record'), port=5001, ssl_context=("cert_file", "key_file"))
-    app.run(ssl_context=("cert_file", "key_file"))
+    #app.config['SERVER_NAME'] = args.get('record') + ':5001'
+    app.run(host=args.get('record'), port=5001, ssl_context=("cert_file", "key_file"))
+    #app.run(ssl_context=("cert_file", "key_file"))
 
 if __name__ == "__main__":
     main()
