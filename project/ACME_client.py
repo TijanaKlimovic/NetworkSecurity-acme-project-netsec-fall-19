@@ -204,6 +204,5 @@ class ACME_client:
                 break
             else:
                 print(r.text)
-        print(r)
         return r
 
