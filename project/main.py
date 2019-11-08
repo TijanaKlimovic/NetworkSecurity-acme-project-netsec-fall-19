@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import serialization
 
 from ACME_client import ACME_client
 from DNS_server import Resolver
-from ChallengeHTTP import ChallengeHTTP
+#from ChallengeHTTP import ChallengeHTTP
 import hashlib
 
 
@@ -31,12 +31,14 @@ if __name__ == '__main__':
     dns.start()
 
     #DNS_server = subprocess.Popen(['python', 'DNS_server.py', args.get('record')])
-    #Chall_http_server = subprocess.Popen(['python', "ChallengeHTTP.py",args.get('record')])
+    Chall_http_server = subprocess.Popen(['python', "ChallengeHTTP.py",args.get('record')])
     Shutdown_server = subprocess.Popen(['python', "ShutdownHTTP.py",args.get('record')])
 
-    config = {'host': args.get('record'), 'port': 5002}
-    http_challenge_server = ChallengeHTTP()
-    Chall_http_server = multiprocessing.Process(target=http_challenge_server.start(args.get('record')),kwargs=config)
+    #config = {'host': args.get('record'), 'port': 5002}
+    #http_challenge_server = ChallengeHTTP()
+    #http_challenge_thread = multiprocessing.Process(target=http_challenge_server.start(args.get('record')),kwargs=config)
+    #http_challenge_thread.start()
+    #print("the thread is heer")
 
     #PREPARE PAYLOAD FOR ORDER
     identifiers = [None]*len(args.get('domain'))
@@ -107,8 +109,8 @@ if __name__ == '__main__':
             #url = 'http://' + args.get('record') + ':5002/'+ domain + "/.well-known/acme-challenge/" + token
             with open("keys", "w") as a:
                 a.write(key)
-            with open("tokens" , "w" )  as f:
-                 f.write(token)
+            with open("tokens" , "w" ) as f:
+                f.write(token)
 
            #url = 'http://' + args.get('record') + ':5002/' + "/.well-known/acme-challenge/" + token
 
@@ -175,7 +177,9 @@ if __name__ == '__main__':
         print("REVOKE NOT SET")
 
     #when ShutdownHTTP.py process exited kill all other subprocesses
-    Shutdown_server.wait()  
+    Shutdown_server.wait()
+    http_challenge_thread.terminate()
+    http_challenge_thread.join()
     #Chall_http_server.kill()
     HTTPS_server.kill()
 

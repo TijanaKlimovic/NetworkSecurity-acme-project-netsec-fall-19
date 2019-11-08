@@ -1,6 +1,6 @@
-from flask import Flask, request
+'''from flask import Flask, request
 
-class ChallengeHTTP:
+class ChallengeHTTP():
     def __init__(self):
         pass
 
@@ -12,7 +12,7 @@ class ChallengeHTTP:
             with open("tokens", "r") as f:
                 savedToken = f.read()
             with open("keys", "r") as a:
-                authenticationKey =a.read()
+                authenticationKey = a.read()
 
             if savedToken != token:
                  return "No challenge set for this token"
@@ -20,6 +20,40 @@ class ChallengeHTTP:
                 return authenticationKey
 
         return self.app.run()
+
+'''
+from flask import Flask
+import argparse
+
+app = Flask(__name__)
+
+@app.route('/.well-known/acme-challenge/<token>')
+def doHTTPChallenge(token):
+    with open("tokens", "r") as f:
+        savedToken = f.read()
+    with open("keys", "r") as a:
+        authenticationKey = a.read()
+
+    if not savedToken == token:
+        return "No challenge set for this token"
+    else:
+        return authenticationKey
+
+def main():
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('record')
+    args = vars(parser.parse_args())
+    #print('THE RECORD IS:' ,args.get('record'))
+    #app.config['SERVER_NAME'] = args.get('record') + ':5002'
+    app.run(host=args.get('record'), port=5002)
+    #app.run()
+
+if __name__ == "__main__":
+    main()
+
+
+
+
 
 '''
 from flask import Flask, request
