@@ -33,10 +33,10 @@ if __name__ == '__main__':
 
     #DNS_server = subprocess.Popen(['python', 'DNS_server.py', args.get('record')])
     Chall_http_server = subprocess.Popen(['python', "ChallengeHTTP.py",args.get('record')])
-    #Shutdown_server = subprocess.Popen(['python', "ShutdownHTTP.py",args.get('record')])
+    Shutdown_server = subprocess.Popen(['python', "ShutdownHTTP.py",args.get('record')])
 
     config = {'host': args.get('record'), 'port': 5002}
-    Chall_http_server = multiprocessing.Process(target=ChallengeHTTP.start_server(args.get('record')),kwargs=config)
+    #Chall_http_server = multiprocessing.Process(target=ChallengeHTTP.start_server(args.get('record')),kwargs=config)
 
     #PREPARE PAYLOAD FOR ORDER
     identifiers = [None]*len(args.get('domain'))
