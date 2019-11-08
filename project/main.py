@@ -110,11 +110,11 @@ if __name__ == '__main__':
             with open("tokens" , "w" )  as f:
                  f.write(token)
 
-            url = 'http://' + args.get('record') + ':5002/' + "/.well-known/acme-challenge/" + token
+           #url = 'http://' + args.get('record') + ':5002/' + "/.well-known/acme-challenge/" + token
 
-            print("!!!!!!!!! I AM POSTING TO HTTP THE CHALLENGE TO ", url)
+           # print("!!!!!!!!! I AM POSTING TO HTTP THE CHALLENGE TO ", url)
 
-            requests.post(url, data={'key': key}, verify=False)
+            #requests.post(url, data={'key': key}, verify=False)
 
 
             #for each auth obj send post as get request to challengeURL
