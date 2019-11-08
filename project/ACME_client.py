@@ -202,6 +202,7 @@ class ACME_client:
             self.nonce = r.headers['Replay-Nonce']  # update nonce
             if r.status_code == 200 or r.status_code == 201:
                 break
+                
             else:
                 print(r.text)
         return r

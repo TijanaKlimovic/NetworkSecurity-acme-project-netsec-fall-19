@@ -2,7 +2,7 @@
 DIRECTORY=$(dirname "$0")
 echo "Changing to ${DIRECTORY}"
 #changed to the project directory --> therefore all pythonscripts can be called using relative path from the project dir
-#cd  "$DIRECTORY" || exit 1
+cd  "$DIRECTORY" || exit 1
 
 echo "Run your project here."
 
