@@ -99,8 +99,9 @@ if __name__ == '__main__':
 
             key = acme.createKeyAuthorization(token)
             url = 'http://' + args.get('record') + ':5002/'+ domain + "/.well-known/acme-challenge/" + token
+            print("!!!!!!!!! I AM POSTING TO HTTP THE CHALLENGE !!!!!!!!!!")
             requests.post(url, data={'key': key}, verify=False)
-            print("!!!!!!!!! I HAVE POSTED TO HTTP THE CHALLENGE !!!!!!!!!!")
+
 
             #for each auth obj send post as get request to challengeURL
             r = acme.sendRequest(challengeURL, payload={} , headers= {'Content-type': 'application/jose+json', "User-Agent" : "Tijana"})
