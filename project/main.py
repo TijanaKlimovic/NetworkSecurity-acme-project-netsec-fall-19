@@ -34,12 +34,6 @@ if __name__ == '__main__':
     Chall_http_server = subprocess.Popen(['python', "ChallengeHTTP.py",args.get('record')])
     Shutdown_server = subprocess.Popen(['python', "ShutdownHTTP.py",args.get('record')])
 
-    #config = {'host': args.get('record'), 'port': 5002}
-    #http_challenge_server = ChallengeHTTP()
-    #http_challenge_thread = multiprocessing.Process(target=http_challenge_server.start(args.get('record')),kwargs=config)
-    #http_challenge_thread.start()
-    #print("the thread is heer")
-
     #PREPARE PAYLOAD FOR ORDER
     identifiers = [None]*len(args.get('domain'))
     for k in range(len(identifiers)):
@@ -178,9 +172,7 @@ if __name__ == '__main__':
 
     #when ShutdownHTTP.py process exited kill all other subprocesses
     Shutdown_server.wait()
-    #http_challenge_thread.terminate()
-    #http_challenge_thread.join()
-    #Chall_http_server.kill()
+    Chall_http_server.kill()
     HTTPS_server.kill()
 
 

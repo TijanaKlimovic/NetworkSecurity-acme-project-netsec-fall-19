@@ -1,27 +1,3 @@
-'''from flask import Flask, request
-
-class ChallengeHTTP():
-    def __init__(self):
-        pass
-
-    def start(self, record):
-        self.app = Flask("http_challenge_server")
-
-        @self.app.route('/.well-known/acme-challenge/<token>')
-        def doChallenge(token):
-            with open("tokens", "r") as f:
-                savedToken = f.read()
-            with open("keys", "r") as a:
-                authenticationKey = a.read()
-
-            if savedToken != token:
-                 return "No challenge set for this token"
-            else:
-                return authenticationKey
-
-        return self.app.run()
-
-'''
 from flask import Flask
 import argparse
 
