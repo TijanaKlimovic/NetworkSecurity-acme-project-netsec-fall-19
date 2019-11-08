@@ -1,4 +1,21 @@
+
+'''
 from flask import Flask, request
+
+class ChallengeHTTP:
+    def __init__(self):
+        pass
+
+    def start(self, record):
+        self.app = Flask()
+
+    @self.app.route('/.well-known/acme-challenge/<token>')
+    def doChallenge(self):
+
+'''
+from flask import Flask, request
+
+
 import argparse
 
 app = Flask(__name__)

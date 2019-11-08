@@ -1,10 +1,15 @@
 import argparse, time, subprocess ,requests
+import multiprocessing
+
 from cryptography.hazmat.primitives import serialization
+
 from ACME_client import ACME_client
 from DNS_server import Resolver
 import hashlib
 
-#parsing data
+from project import ChallengeHTTP
+
+
 def parseArgs():
 
     parser = argparse.ArgumentParser(description='Process some integers.')
@@ -30,7 +35,10 @@ if __name__ == '__main__':
 
     #DNS_server = subprocess.Popen(['python', 'DNS_server.py', args.get('record')])
     Chall_http_server = subprocess.Popen(['python', "ChallengeHTTP.py",args.get('record')])
-    Shutdown_server = subprocess.Popen(['python', "ShutdownHTTP.py",args.get('record')])
+    #Shutdown_server = subprocess.Popen(['python', "ShutdownHTTP.py",args.get('record')])
+
+    config = {'host': args.get('record'), 'port': 5002}
+    Chall_http_server = multiprocessing.Process(target=ChallengeHTTP.start_server(args.get('record')),kwargs=config)
 
     #PREPARE PAYLOAD FOR ORDER
     identifiers = [None]*len(args.get('domain'))
@@ -98,7 +106,8 @@ if __name__ == '__main__':
                     break
 
             key = acme.createKeyAuthorization(token)
-            url = 'http://' + args.get('record') + ':5002/'+ domain + "/.well-known/acme-challenge/" + token
+            #url = 'http://' + args.get('record') + ':5002/'+ domain + "/.well-known/acme-challenge/" + token
+            url = 'http://' + args.get('record') + ':5002/' + "/.well-known/acme-challenge/" + token
 
             print("!!!!!!!!! I AM POSTING TO HTTP THE CHALLENGE TO ", url)
 
