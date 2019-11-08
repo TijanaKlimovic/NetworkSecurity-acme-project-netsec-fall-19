@@ -31,7 +31,7 @@ def main():
     parser.add_argument('record')
     args = vars(parser.parse_args())
     #print('THE RECORD IS:' ,args.get('record'))
-    app.config['SERVER_NAME'] = args.get('record') + 5002
+    app.config['SERVER_NAME'] = args.get('record') + ':5002'
     #app.run(host=args.get('record'), port=5002)
     app.run()
 
