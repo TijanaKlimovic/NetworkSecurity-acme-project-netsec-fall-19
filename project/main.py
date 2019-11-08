@@ -178,8 +178,8 @@ if __name__ == '__main__':
 
     #when ShutdownHTTP.py process exited kill all other subprocesses
     Shutdown_server.wait()
-    http_challenge_thread.terminate()
-    http_challenge_thread.join()
+    #http_challenge_thread.terminate()
+    #http_challenge_thread.join()
     #Chall_http_server.kill()
     HTTPS_server.kill()
 
