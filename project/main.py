@@ -100,6 +100,7 @@ if __name__ == '__main__':
             key = acme.createKeyAuthorization(token)
             url = 'http://' + args.get('record') + ':5002/'+ domain + "/.well-known/acme-challenge/" + token
             requests.post(url, data={'key': key}, verify=False)
+            print("!!!!!!!!! I HAVE POSTED TO HTTP THE CHALLENGE !!!!!!!!!!")
 
             #for each auth obj send post as get request to challengeURL
             r = acme.sendRequest(challengeURL, payload={} , headers= {'Content-type': 'application/jose+json', "User-Agent" : "Tijana"})
@@ -107,6 +108,9 @@ if __name__ == '__main__':
             #print("CHALLENGE SENT: ", r.text)
 
             response = acme.sendRequest(acme.authorizations[i])
+
+            print("!!!!!!!!! THE ACME SERVER TRIES TO VERIFY NOW !!!!!!!!!!")
+
             while response.json()['status'] != 'valid':
                 time.sleep(2)
                 response = acme.sendRequest(acme.authorizations[i])
