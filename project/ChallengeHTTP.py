@@ -8,6 +8,7 @@ response = ""
 def index():
      return 'Hello world'
 
+
 @app.route('/<path:domain_name_token>', methods = ['GET'])
 def doHTTPChallenge(domain_name_token):
         print(response)
